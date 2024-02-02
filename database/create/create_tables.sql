@@ -1,4 +1,6 @@
-CREATE TABLE User (
+
+    CREATE TABLE User(
+
     first_name VARCHAR(35), 
     second_name VARCHAR(35),
     pass_word VARCHAR(35), 
@@ -9,21 +11,23 @@ CREATE TABLE User (
     PRIMARY KEY (user_id) 
 );
 
-CREATE TABLE UserAddress (
-    Address_1 VARCHAR(35), 
-    Address_2 VARCHAR(35),
-    City VARCHAR(35), 
-    user_id INT NOT NULL,
-    Zip VARCHAR(35), 
-    Country VARCHAR(35), 
-    last_date_updated DATETIME,
-    email VARCHAR(35),
-    user_address_id INT NOT NULL AUTO_INCREMENT,
-    PRIMARY KEY (user_address_id), 
-    FOREIGN KEY (user_id) REFERENCES User(user_id)
+   
+    CREATE TABLE UserAddress (
+        Address_1 VARCHAR(35), 
+        Address_2 VARCHAR(35),
+        City VARCHAR(35), 
+        user_id INT NOT NULL,
+        Zip VARCHAR(35), 
+        Country VARCHAR(35), 
+        last_date_updated DATETIME,
+        email VARCHAR(35),
+        user_address_id INT NOT NULL AUTO_INCREMENT,
+        PRIMARY KEY (user_address_id), 
+        FOREIGN KEY (user_id) REFERENCES User(user_id)
 );
 
-CREATE TABLE Team (
+    
+    CREATE TABLE Team (
     team_name VARCHAR(35), 
     team_points INT,
     log_position INT, 
@@ -37,7 +41,8 @@ CREATE TABLE Team (
     PRIMARY KEY (team_id) 
 );
 
-CREATE TABLE Player (
+
+    CREATE TABLE Player (
     player_id INT NOT NULL AUTO_INCREMENT, 
     first_name VARCHAR(35),
     second_name VARCHAR(35),
