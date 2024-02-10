@@ -25,7 +25,12 @@ SECRET_KEY = 'django-insecure-v^yc!+^+3uml-bb@uvkpijzcn9_n$4hsown4c83q(=c_16xx$+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# Turn on/off jwt Auth Header validation
+JWT_AUTH = False
+
 ALLOWED_HOSTS = ['*']
+CORS_ALLOWED_ORIGIN = ['*']
+CORS_ORIGIN_ALLOW_ALL = True
 
 
 # Application definition
@@ -33,6 +38,7 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     
     'django.contrib.admin',
+    'corsheaders',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -43,10 +49,13 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -123,7 +132,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

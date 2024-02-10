@@ -4,12 +4,12 @@ from cs415.models import User,Useraddress,Team,Player
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = '__all_'
+        fields = '__all__'
 
 class UseraddressSerializer(serializers.ModelSerializer):
     class Meta:
         model = Useraddress
-        fields = '__all_'
+        fields = '__all__'
 
 class PlayerSerializer(serializers.ModelSerializer):
     class Meta:
