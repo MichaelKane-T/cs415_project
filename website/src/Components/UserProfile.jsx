@@ -117,7 +117,7 @@ const UserProfile = () => {
             </div> */}
           </div>
           <button
-                className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                className="flex justify-center motion-safe:animate-bounce w-[200px] rounded-md font-medium my-6 mx-auto py-3 ring-1 ring-yellow-200 bg-lime-500 hover:bg-lime-300 hover:-translate-y-1 hover:scale-125 text-white hover:text-lime-700  px-4 hover:rounded transition ease-in-out delay-150 duration-300"
                 onClick={handleLogout}
                 key="logout-button"
               >
