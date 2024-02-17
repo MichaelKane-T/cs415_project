@@ -36,4 +36,5 @@ urlpatterns = [
     path('user-infos/user/<int:id>', views.GetSingleUserInfoAPIView.as_view()),
     path('pages/page/<int:id>', views.GetSinglePageDataAPIView.as_view()),
     path('users/user/<int:id>',views.GetSingleUserInfoAPIView.as_view()),
+    path('users/create_user/', views.CreateUserView.as_view(), name='create_user'),
 ]

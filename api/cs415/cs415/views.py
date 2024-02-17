@@ -165,7 +165,7 @@ class AddressTypeAPIView(APIView):
 class UserInfoAPIView(APIView):
     def post(self, request, *args, **kwargs):
         if JWT_AUTH: JWTAuthentication.authenticate(self,request=request)
-        serializer = UserinfoSerializer(data=request.data)
+        serializer = UserInfoSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response({'data': serializer.data})
@@ -174,8 +174,8 @@ class UserInfoAPIView(APIView):
                                 status=status.HTTP_400_BAD_REQUEST)
     def get(self,request):
         if JWT_AUTH: JWTAuthentication.authenticate(self,request=request)
-        user_infos = Userinfo.objects.all()
-        serializer = UserinfoSerializer(user_infos, many=True)
+        user_infos = UserInfo.objects.all()
+        serializer = UserInfoSerializer(user_infos, many=True)
         return Response({'user_infos': serializer.data})
 
 class PageDataAPIView(APIView):
@@ -201,3 +201,58 @@ class UserPhoneAPIView(APIView):
         phones = Userphone.objects.filter(user=user)
         serializer = PhoneSerializerGet(phones, many=True)
         return Response({'phones': serializer.data})
+    
+class CreateUserView(APIView):
+    def post(self, request, *args, **kwargs):
+        data = request.data
+
+        # Create a user
+        user_data = {
+            'first_name': data.get('first_name'),
+            'second_name': data.get('second_name'),
+            'pass_word': data.get('pass_word'),
+            'recovery_key': data.get('recovery_key'),
+            'date_created': datetime.now(),
+            'email': data.get('email'),  # Use the email from the request
+        }
+
+        user_serializer = UserSerializer(data=user_data)
+        if user_serializer.is_valid():
+            # Save the user data
+            user_serializer.save()
+
+            # Extract user_id from the newly created user
+            user_id = user_serializer.data.get('user_id')
+
+            # Create a Useraddress associated with the user
+            user_address_data = {
+                'address_1': data.get('address_1'),
+                'address_2': data.get('address_2'),
+                'city': data.get('city'),
+                'zip': data.get('zip'),
+                'country': data.get('country'),
+                'email': data.get('email'),  # Use the email from the request
+                'user': user_id,
+                'last_date_updated': datetime.now(),
+            }
+
+            # Serialize and save the Useraddress data
+            user_address_serializer = UseraddressSerializer(data=user_address_data)
+            if user_address_serializer.is_valid():
+                user_address_serializer.save()
+
+                # Create a combined response
+                response_data = {
+                    'user': user_serializer.data,
+                    'user_address': user_address_serializer.data,
+                }
+
+                return Response(response_data, status=status.HTTP_201_CREATED)
+            else:
+                # Delete the user if the associated Useraddress creation fails
+                User.objects.filter(user_id=user_id).delete()
+                return Response({'error': 'Failed to create Useraddress', 'details': user_address_serializer.errors},
+                                status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response({'error': 'Failed to create User', 'details': user_serializer.errors},
+                            status=status.HTTP_400_BAD_REQUEST)

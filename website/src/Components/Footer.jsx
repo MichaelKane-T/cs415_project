@@ -3,14 +3,14 @@ import { AiOutlineGithub } from "react-icons/ai";
 
 function Footer() {
   return (
-    <div className="w-full flex bg-gray-200 py-8 mx-auto px-4 lg:grid-cols-3 gap-8 justify-center text-gray-300">
+    <div className="w-full flex bg-gray-200 py-4 mx-auto px-4 lg:grid-cols-3 gap-8 justify-center text-gray-300">
       <div className="max-w-screen-xl mx-auto p-4 md:py-8">
         <div className="flex items-center justify-center py-2 text-2xl font-semibold text-[#48D1CC]">
           CS415 App
         </div>
         <div className="flex justify-center sm:flex sm:items-center gap-2 sm:justify-center">
           <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0">
-            <div class="flex flex-row justify-center gap-4 mt-3 ">
+            <div className="flex flex-row justify-center gap-4 mt-3 ">
               <div className=" transition ease-out hover:-translate-y-1 hover:scale-110">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

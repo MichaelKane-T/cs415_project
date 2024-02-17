@@ -51,25 +51,26 @@ class User(models.Model):
     pass_word = models.CharField(max_length=35, blank=True, null=True)
     recovery_key = models.CharField(max_length=35, blank=True, null=True)
     date_created = models.DateTimeField(blank=True, null=True)
-    email = models.CharField(max_length=35, blank=True, null=True)
+    email = models.EmailField(max_length=35, blank=True, null=True)  # Use EmailField for email
     user_id = models.AutoField(primary_key=True)
 
     class Meta:
         managed = False
         db_table = 'User'
+
     def __str__(self):
         return f'{self.first_name} {self.second_name}'
 
 
 class Useraddress(models.Model):
-    address_1 = models.CharField(db_column='Address_1', max_length=35, blank=True, null=True)  # Field name made lowercase.
-    address_2 = models.CharField(db_column='Address_2', max_length=35, blank=True, null=True)  # Field name made lowercase.
-    city = models.CharField(db_column='City', max_length=35, blank=True, null=True)  # Field name made lowercase.
-    user = models.ForeignKey(User, models.DO_NOTHING)
-    zip = models.CharField(db_column='Zip', max_length=35, blank=True, null=True)  # Field name made lowercase.
-    country = models.CharField(db_column='Country', max_length=35, blank=True, null=True)  # Field name made lowercase.
+    address_1 = models.CharField(db_column='Address_1', max_length=35, blank=True, null=True)
+    address_2 = models.CharField(db_column='Address_2', max_length=35, blank=True, null=True)
+    city = models.CharField(db_column='City', max_length=35, blank=True, null=True)
+    user = models.ForeignKey('User', models.DO_NOTHING)
+    zip = models.CharField(db_column='Zip', max_length=35, blank=True, null=True)
+    country = models.CharField(db_column='Country', max_length=35, blank=True, null=True)
     last_date_updated = models.DateTimeField(blank=True, null=True)
-    email = models.CharField(max_length=35, blank=True, null=True)
+    email = models.EmailField(max_length=35, blank=True, null=True)  # Use EmailField for email
     user_address_id = models.AutoField(primary_key=True)
 
     class Meta:
@@ -106,7 +107,7 @@ class UserInfo(models.Model):
         db_table = 'UserInfo'
 
     def __str__(self):
-        return f'{self.user.first_name} {self.user.last_name} - {self.profile_bio}'
+        return f'{self.user.first_name} {self.user.second_name} - {self.profile_bio}'
     
 class Phonetype(models.Model):
     phone_type_id = models.AutoField(primary_key=True)

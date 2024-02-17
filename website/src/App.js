@@ -4,7 +4,7 @@ import { BrowserRouter as Router,
           Route,
           Link} from "react-router-dom";
 import './App.css';
-import { RegisterForm } from "./Components/RegisterForm";
+import RegisterForm from "./Components/RegisterForm";
 import LoginForm from "./Components/LoginForm";
 import LandingPage from "./Components/LandingPage";
 import UserProfile from "./Components/UserProfile";
@@ -13,9 +13,7 @@ import Module1 from "./Components/Module1";
 import Module2 from "./Components/Module2";
 import Module3 from "./Components/Module3";
 import MainLayout from './Layout/MainLayout';
-// Axios.get("https://catfact.ninja/fact").then((res) => {
-//   console.log(res.data);
-// })
+
 
 function NoMatch() {
   return (

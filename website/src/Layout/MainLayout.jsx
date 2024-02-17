@@ -4,9 +4,9 @@ import Navbar from "../Components/Navbar";
 
 function MainLayout({ children }) {
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       <Navbar />
-      <div>{children}</div>
+      <div className="flex-grow p-20">{children}</div>
       <Footer />
     </div>
   );
