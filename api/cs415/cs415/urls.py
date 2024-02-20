@@ -37,4 +37,7 @@ urlpatterns = [
     path('pages/page/<int:id>', views.GetSinglePageDataAPIView.as_view()),
     path('users/user/<int:id>',views.GetSingleUserInfoAPIView.as_view()),
     path('users/create_user/', views.CreateUserView.as_view(), name='create_user'),
+    path('users/create_player/', views.CreatePlayerView.as_view(), name='create_player'),
+    path('users/create_team/', views.CreateTeamView.as_view(), name='create_team'),
+
 ]

@@ -256,3 +256,21 @@ class CreateUserView(APIView):
         else:
             return Response({'error': 'Failed to create User', 'details': user_serializer.errors},
                             status=status.HTTP_400_BAD_REQUEST)
+
+class CreatePlayerView(APIView):
+    def post(self, request, *args, **kwargs):
+        serializer = PlayerSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'data': serializer.data}, status=status.HTTP_201_CREATED)
+        else:
+            return Response({'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+
+class CreateTeamView(APIView):
+    def post(self, request, *args, **kwargs):
+        serializer = TeamSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'data': serializer.data}, status=status.HTTP_201_CREATED)
+        else:
+            return Response({'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
