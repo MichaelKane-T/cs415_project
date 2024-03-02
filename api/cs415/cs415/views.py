@@ -53,11 +53,21 @@ class Login(APIView):
     
 
 class UserAPIView(APIView):
-    def get(self,request):
-        if JWT_AUTH: JWTAuthentication.authenticate(self,request=request)
-        users = User.objects.all()
-        serializer = UserSerializer(users, many=True)
-        return Response({'users': serializer.data})
+    def get(self, request, user_id=None):
+        if JWT_AUTH:  # Assuming JWT_AUTH is defined elsewhere
+            JWTAuthentication.authenticate(self, request=request)
+
+        if user_id is not None:
+            try:
+                user = User.objects.get(user_id=user_id)
+                serializer = UserSerializer(user)
+                return Response({'user': serializer.data})
+            except User.DoesNotExist:
+                return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+        else:
+            users = User.objects.all()
+            serializer = UserSerializer(users, many=True)
+            return Response({'users': serializer.data})
 
 class UseraddressAPIView(APIView):
     def get(self, request, user_id):
