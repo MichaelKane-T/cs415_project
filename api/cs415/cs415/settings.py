@@ -87,11 +87,12 @@ WSGI_APPLICATION = 'cs415.wsgi.application'
 
 DATABASES = {
         'default': {
-            'ENGINE':'django.db.backends.mysql',
+            # 'ENGINE':'django.db.backends.mysql',
             'NAME':'cs415website',
             'USER':'apiuser',
             'PASSWORD':'apiuserpass',
-            'HOST':'54.162.50.80',  
+            # 'HOST':'54.162.50.80',  
+            'HOST':'cs415-database',
             'PORT': '3306'
         }
     }
