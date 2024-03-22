@@ -5,6 +5,8 @@ services:
     image: image_cs415_api
     container_name: dc_cs415_api
     restart: always
+    networks:
+      - cs415-network
     ports:
       - "8080:80"
   cs415-website:
