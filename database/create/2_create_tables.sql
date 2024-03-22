@@ -3,7 +3,7 @@ USE cs415website;
 CREATE TABLE User (
   user_id int NOT NULL AUTO_INCREMENT,
   first_name varchar(25) NOT NULL,
-  last_name varchar(30) NOT NULL,
+  second_name varchar(30) NOT NULL,
   email varchar(40) NOT NULL,
   `password` varchar(40) NOT NULL,
   created_date datetime DEFAULT NULL,
