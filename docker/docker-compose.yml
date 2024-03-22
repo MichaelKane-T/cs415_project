@@ -8,14 +8,14 @@ services:
     networks:
       - cs415-network
     ports:
-      - "8080:80"
+      - 8080:80
   cs415-website:
     build: https://github.com/MichaelKane-T/cs415_website.git#container
     image: image_cs415_website
     container_name: dc_cs415_website
     restart: always
     ports:
-      - "80:80"
+      - 80:80
   cs415-database:
     build: https://github.com/MichaelKane-T/cs415_project.git#container:database
     image: image_cs415_database
