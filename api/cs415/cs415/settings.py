@@ -87,7 +87,8 @@ WSGI_APPLICATION = 'cs415.wsgi.application'
 
 DATABASES = {
         'default': {
-            # 'ENGINE':'django.db.backends.mysql',
+            #'ENGINE':'django.db.backends.mysql',
+            'ENGINE':'django.db.backends.mysql',
             'NAME':'cs415website',
             'USER':'apiuser',
             'PASSWORD':'apiuserpass',
