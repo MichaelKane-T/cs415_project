@@ -48,7 +48,7 @@ class Team(models.Model):
 class User(models.Model):
     first_name = models.CharField(max_length=35, blank=True, null=True)
     second_name = models.CharField(max_length=35, blank=True, null=True)
-    pass_word = models.CharField(max_length=35, blank=True, null=True)
+    password = models.CharField(max_length=35, blank=True, null=True)
     recovery_key = models.CharField(max_length=35, blank=True, null=True)
     date_created = models.DateTimeField(blank=True, null=True)
     email = models.EmailField(max_length=35, blank=True, null=True)  # Use EmailField for email
