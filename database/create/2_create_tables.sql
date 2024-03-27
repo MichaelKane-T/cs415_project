@@ -20,17 +20,18 @@ CREATE TABLE AddressType (
 );
 
 CREATE TABLE UserAddress (
-    Address_1 VARCHAR(35),
-    Address_2 VARCHAR(35),
-    City VARCHAR(35),
-    user_id INT NOT NULL,
-    Zip VARCHAR(35),
-    Country VARCHAR(35),
-    last_date_updated DATETIME,
-    email VARCHAR(35),
     user_address_id INT NOT NULL AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    street_1 VARCHAR(50),
+    street_2 VARCHAR(50),
+    city VARCHAR(35),
+    st VARCHAR(2),
+    zip VARCHAR(10),
+    country VARCHAR(35),
+    address_type_id INT NOT NULL,
     PRIMARY KEY (user_address_id),
-    FOREIGN KEY (user_id) REFERENCES User(user_id)
+    FOREIGN KEY (user_id) REFERENCES User(user_id),
+    FOREIGN KEY (address_type_id) REFERENCES AddressType(address_type_id)
 );
 
 CREATE TABLE Team (
