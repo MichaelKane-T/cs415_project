@@ -72,7 +72,7 @@ CREATE TABLE UserInfo (
     user_info_id INT NOT NULL AUTO_INCREMENT,
     user_id INT NOT NULL,
     profile_bio VARCHAR(500),
-    profile_picture VARCHAR(100),
+    profile_picture VARCHAR(150),
     modified_date DATETIME,
     created_date DATETIME,
     PRIMARY KEY (user_info_id),
@@ -99,9 +99,10 @@ CREATE TABLE UserPhone (
 
 CREATE TABLE PageData (
     page_data_id INT NOT NULL AUTO_INCREMENT,
-    page_name VARCHAR(25) NOT NULL,
-    page_title VARCHAR(25) NOT NULL,
-    page_description VARCHAR(150) NOT NULL,
-    page_picture VARCHAR(100),
+    page_name VARCHAR(150) NOT NULL,
+    page_title VARCHAR(150) NOT NULL,
+    page_description TEXT NOT NULL,
+    page_picture VARCHAR(250),
+    page_menu VARCHAR(35),
     PRIMARY KEY (page_data_id)
 );
