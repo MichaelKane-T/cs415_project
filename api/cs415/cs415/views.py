@@ -67,7 +67,7 @@ class Login(APIView):
         user = User.objects.get(email = email, password=password)
 
         # add last login to User table
-        serializer = UserSerializer(user, data={'last_login': str(datetime.now())}, partial=True)
+        serializer = UserSerializer(user, data={'last_login': str(datetime.datetime.now())}, partial=True)
         if serializer.is_valid():
             serializer.save()
 
