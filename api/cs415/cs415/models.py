@@ -44,48 +44,13 @@ class Team(models.Model):
     def __str__(self):
         return f'{self.team_name} {self.team_id}'
 
-
-class User(models.Model):
-    first_name = models.CharField(max_length=35, blank=True, null=True)
-    second_name = models.CharField(max_length=35, blank=True, null=True)
-    password = models.CharField(max_length=35, blank=True, null=True)
-    recovery_key = models.CharField(max_length=35, blank=True, null=True)
-    date_created = models.DateTimeField(blank=True, null=True)
-    email = models.EmailField(max_length=35, blank=True, null=True)  # Use EmailField for email
-    user_id = models.AutoField(primary_key=True)
-
-    class Meta:
-        managed = False
-        db_table = 'User'
-
-    def __str__(self):
-        return f'{self.first_name} {self.second_name}'
-
-
-class Useraddress(models.Model):
-    address_1 = models.CharField(db_column='Address_1', max_length=35, blank=True, null=True)
-    address_2 = models.CharField(db_column='Address_2', max_length=35, blank=True, null=True)
-    city = models.CharField(db_column='City', max_length=35, blank=True, null=True)
-    user = models.ForeignKey('User', models.DO_NOTHING)
-    zip = models.CharField(db_column='Zip', max_length=35, blank=True, null=True)
-    country = models.CharField(db_column='Country', max_length=35, blank=True, null=True)
-    last_date_updated = models.DateTimeField(blank=True, null=True)
-    email = models.EmailField(max_length=35, blank=True, null=True)  # Use EmailField for email
-    user_address_id = models.AutoField(primary_key=True)
-
-    class Meta:
-        managed = False
-        db_table = 'UserAddress'
-
-    def __str__(self):
-        return f'{self.address_1} {self.country}'
-
 class Pagedata(models.Model):
     page_data_id = models.AutoField(primary_key=True)
-    page_name = models.CharField(max_length=25)
-    page_title = models.CharField(max_length=25)
-    page_description = models.CharField(max_length=150)
-    page_picture = models.CharField(max_length=100, blank=True, null=True)
+    page_name = models.CharField(max_length=150)
+    page_title = models.CharField(max_length=150)
+    page_description = models.TextField()
+    page_picture = models.CharField(max_length=250)
+    page_menu = models.CharField(max_length=35)
 
     class Meta:
         managed = False
@@ -93,22 +58,8 @@ class Pagedata(models.Model):
 
     def __str__(self):
         return f'{self.page_name}'
-    
-class UserInfo(models.Model):
-    user_info_id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(User, models.DO_NOTHING)
-    profile_bio = models.CharField(max_length=500, blank=True, null=True)
-    profile_picture = models.CharField(max_length=100, blank=True, null=True)
-    modified_date = models.DateTimeField(blank=True, null=True)
-    created_date = models.DateTimeField(blank=True, null=True)
 
-    class Meta:
-        managed = False
-        db_table = 'UserInfo'
 
-    def __str__(self):
-        return f'{self.user.first_name} {self.user.second_name} - {self.profile_bio}'
-    
 class Phonetype(models.Model):
     phone_type_id = models.AutoField(primary_key=True)
     phone_type = models.CharField(max_length=10)
@@ -119,7 +70,68 @@ class Phonetype(models.Model):
 
     def __str__(self):
         return f'{self.phone_type}'
-    
+
+class User(models.Model):
+    user_id = models.AutoField(primary_key=True)
+    first_name = models.CharField(max_length=25)
+    last_name = models.CharField(max_length=30)
+    email = models.CharField(unique=True, max_length=40)
+    password = models.CharField(max_length=40)
+    created_date = models.DateTimeField(blank=True, null=True)
+    is_active = models.IntegerField(blank=True, null=True)
+    last_login = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'User'
+
+    def __str__(self):
+        return f'{self.first_name} {self.last_name}'
+
+class Addresstype(models.Model):
+    address_type_id = models.AutoField(primary_key=True)
+    address_type = models.CharField(max_length=10)
+
+    class Meta:
+        managed = False
+        db_table = 'AddressType'
+
+    def __str__(self):
+        return f'{self.address_type}'
+
+class Useraddress(models.Model):
+    user_address_id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(User, models.DO_NOTHING)
+    street_1 = models.CharField(max_length=30, blank=True, null=True)
+    street_2 = models.CharField(max_length=30, blank=True, null=True)
+    city = models.CharField(max_length=25, blank=True, null=True)
+    st = models.CharField(max_length=2, blank=True, null=True)
+    zip = models.CharField(max_length=10, blank=True, null=True)
+    country = models.CharField(max_length=30, blank=True, null=True)
+    address_type = models.ForeignKey(Addresstype, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'UserAddress'
+
+    def __str__(self):
+        return f'{self.user.first_name} {self.user.last_name} - {self.address_1}'
+
+class Userinfo(models.Model):
+    user_info_id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(User, models.DO_NOTHING)
+    profile_bio = models.CharField(max_length=500, blank=True, null=True)
+    profile_picture = models.CharField(max_length=150, blank=True, null=True)
+    modified_date = models.DateTimeField(blank=True, null=True)
+    created_date = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'UserInfo'
+
+    def __str__(self):
+        return f'{self.user.first_name} {self.user.last_name} - {self.profile_bio}'
+
 class Userphone(models.Model):
     user_phone_id = models.AutoField(primary_key=True)
     phone_type = models.ForeignKey(Phonetype, models.DO_NOTHING)
@@ -134,14 +146,3 @@ class Userphone(models.Model):
 
     def __str__(self):
         return f'{self.user.first_name} {self.user.last_name} - {self.phone_type.phone_type}'
-    
-class Addresstype(models.Model):
-    address_type_id = models.AutoField(primary_key=True)
-    address_type = models.CharField(max_length=10)
-
-    class Meta:
-        managed = False
-        db_table = 'AddressType'
-
-    def __str__(self):
-        return f'{self.address_type}'
