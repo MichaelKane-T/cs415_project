@@ -59,12 +59,12 @@ class Login(APIView):
                              'error': 'User with this email does not exist'},
                              status=status.HTTP_404_NOT_FOUND)
 
-        check_pass = User.objects.filter(email = email, pass_word=password).exists()
+        check_pass = User.objects.filter(email = email, password=password).exists()
         if check_pass == False:
             return Response({'success': False,
                              'error': 'Incorrect password for user'},
                              status=status.HTTP_401_UNAUTHORIZED)
-        user = User.objects.get(email = email, pass_word=password)
+        user = User.objects.get(email = email, password=password)
 
         # add last login to User table
         serializer = UserSerializer(user, data={'last_login': str(datetime.now())}, partial=True)
