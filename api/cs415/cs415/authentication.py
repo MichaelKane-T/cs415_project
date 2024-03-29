@@ -45,7 +45,7 @@ class JWTAuthentication(authentication.BaseAuthentication):
             "user_id": user.user_id,
             "scope": 'admin',
             "first_name": user.first_name,
-            "last_name": user.second_name,
+            "last_name": user.last_name,
             "exp": datetime.utcnow() + timedelta(hours=8),
             "iat": datetime.utcnow()
         }
