@@ -2,8 +2,8 @@ version: "3"
 services:
   cs415-api-ec2db:
     build: https://github.com/MichaelKane-T/cs415_project.git#container:api/cs415
-    image: image_cs415_api
-    container_name: dc_cs415_api
+    image: image_cs415_api_ec2db
+    container_name: ec2db_cs415_api
     restart: always
     # networks:
     #   - cs415-network
