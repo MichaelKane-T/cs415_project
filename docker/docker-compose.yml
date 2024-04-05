@@ -1,0 +1,32 @@
+version: "3"
+services:
+  cs415-api-ec2db:
+    build: https://github.com/MichaelKane-T/cs415_project.git#container:api/cs415
+    image: image_cs415_api_ec2db
+    container_name: ec2db_cs415_api
+    restart: always
+    # networks:
+    #   - cs415-network
+    ports:
+      - 80:80
+  # cs415-website:
+  #   build: https://github.com/MichaelKane-T/cs415_website.git#container
+  #   image: image_cs415_website
+  #   container_name: dc_cs415_website
+  #   restart: always
+  #   ports:
+  #     - 80:80
+  # cs415-database:
+  #   build: https://github.com/MichaelKane-T/cs415_project.git#container:database
+  #   image: image_cs415_database
+  #   container_name: dc_cs415_database
+  #   restart: always
+  #   environment:
+  #     MYSQL_ALLOW_EMPTY_PASSWORD: 1
+  #   networks:
+  #     - cs415-network
+  #   ports:
+  #     - 3306:3306
+
+# networks:
+#   cs415-network:
